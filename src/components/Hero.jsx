@@ -1,10 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Upload, LinkIcon, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import DetectionResult from '@/components/DetectionResult';
 import { toast } from 'sonner';
 
 export default function Hero() {
@@ -92,12 +90,19 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative bg-gradient-to-r from-gray-900 via-black to-gray-900 py-40 flex justify-center items-center overflow-hidden">
-      {/* Animated Glitch Effect */}
-      <div className="absolute inset-0 z-10 bg-[url('/path-to-your-batman-glitch-background.jpg')] bg-cover bg-center opacity-50 animate-glitch"></div>
+    <section className="relative w-full h-screen">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        className="absolute inset-0 w-full h-full object-cover z-0"
+      >
+        <source src="/bgvideo.mp4" type="video/mp4" />
+      </video>
 
       {/* Hero Content */}
-      <div className="mx-auto px-4 text-white z-20">
+      <div className="absolute inset-0 flex justify-center items-center z-10 text-white">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-extrabold mb-6 text-glow">DeepFake Detection Tool</h1>
           <p className="text-xl mb-8 text-gray-400">Upload an image or provide a link to identify potential deepfakes.</p>
@@ -112,8 +117,7 @@ export default function Hero() {
                   disabled={!!imageUrl}
                 >
                   <label htmlFor="file-upload" className="cursor-pointer flex items-center">
-                    <Upload className="mr-2" />
-                    {file ? 'File Selected: ' + file.name : 'Upload Image'}
+                    <span className="mr-2">Upload Image</span>
                     <input
                       id="file-upload"
                       name="file"
@@ -132,7 +136,7 @@ export default function Hero() {
                     onClick={clearFile}
                     className="flex-shrink-0"
                   >
-                    <X className="h-4 w-4 text-red-500" />
+                    <span className="text-red-500">X</span>
                   </Button>
                 )}
               </div>
@@ -155,7 +159,7 @@ export default function Hero() {
                     onClick={clearUrl}
                     className="flex-shrink-0"
                   >
-                    <X className="h-4 w-4 text-red-500" />
+                    <span className="text-red-500">X</span>
                   </Button>
                 )}
               </div>
@@ -167,10 +171,7 @@ export default function Hero() {
               disabled={loading || (!file && !imageUrl)}
             >
               {loading ? 'Processing...' : 'Detect DeepFake'}
-              <LinkIcon className="ml-2" />
             </Button>
-
-            <DetectionResult result={result} />
           </form>
         </div>
       </div>
