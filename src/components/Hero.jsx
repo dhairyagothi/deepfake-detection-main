@@ -72,13 +72,10 @@ export default function Hero() {
             let imageUrlToCheck = imageUrl;
 
             if (file) {
-                // Upload to Cloudinary
                 const uploadData = await handleFileUpload(file);
-                // Use the Cloudinary URL for deepfake detection
                 imageUrlToCheck = uploadData;
             }
 
-            // Send the image URL to the Sightengine API
             const response = await fetch(`/api/detect?imageUrl=${encodeURIComponent(imageUrlToCheck)}`, {
                 method: 'GET',
             });
@@ -95,11 +92,11 @@ export default function Hero() {
     };
 
     return (
-        <section className="bg-gradient-to-r from-primary/10 to-secondary/10 py-40 flex justify-center items-center">
-            <div className="mx-auto px-4">
+        <section className="bg-gradient-to-r from-gray-900 via-black to-gray-900 py-40 flex justify-center items-center">
+            <div className="mx-auto px-4 text-white">
                 <div className="max-w-3xl mx-auto text-center">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">Detect DeepFakes with Confidence</h1>
-                    <p className="text-xl mb-8">Upload an image or provide a link to check if it's a deepfake.</p>
+                    <h1 className="text-5xl md:text-6xl font-extrabold mb-6 text-glow">DeepFake Detection Tool</h1>
+                    <p className="text-xl mb-8 text-gray-400">Upload an image or provide a link to identify potential deepfakes.</p>
 
                     <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-6">
                         <div className="flex flex-col md:flex-row w-full space-y-4 md:space-y-0 md:space-x-4 justify-center items-center">
@@ -107,10 +104,10 @@ export default function Hero() {
                                 <Button
                                     type="button"
                                     asChild
-                                    className="w-48"
+                                    className="w-48 bg-gray-800 hover:bg-gray-700"
                                     disabled={!!imageUrl}
                                 >
-                                    <label htmlFor="file-upload" className="cursor-pointer">
+                                    <label htmlFor="file-upload" className="cursor-pointer flex items-center">
                                         <Upload className="mr-2" />
                                         {file ? 'File Selected: ' + file.name : 'Upload Image'}
                                         <input
@@ -131,7 +128,7 @@ export default function Hero() {
                                         onClick={clearFile}
                                         className="flex-shrink-0"
                                     >
-                                        <X className="h-4 w-4" />
+                                        <X className="h-4 w-4 text-red-500" />
                                     </Button>
                                 )}
                             </div>
@@ -144,7 +141,7 @@ export default function Hero() {
                                     value={imageUrl}
                                     onChange={handleUrlChange}
                                     disabled={!!file}
-                                    className="w-full"
+                                    className="w-full bg-gray-800 text-gray-300 placeholder-gray-500 border-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                                 />
                                 {imageUrl && (
                                     <Button
@@ -154,7 +151,7 @@ export default function Hero() {
                                         onClick={clearUrl}
                                         className="flex-shrink-0"
                                     >
-                                        <X className="h-4 w-4" />
+                                        <X className="h-4 w-4 text-red-500" />
                                     </Button>
                                 )}
                             </div>
@@ -162,7 +159,7 @@ export default function Hero() {
 
                         <Button
                             type="submit"
-                            className="w-48"
+                            className="w-48 bg-primary hover:bg-primary-dark text-black"
                             disabled={loading || (!file && !imageUrl)}
                         >
                             {loading ? 'Processing...' : 'Detect DeepFake'}
