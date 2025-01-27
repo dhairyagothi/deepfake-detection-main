@@ -2,7 +2,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata = {
-  title: "PurePixel",
+  title: "ShaniAegis",
   description: "Deepfae detection tool",
 };
 

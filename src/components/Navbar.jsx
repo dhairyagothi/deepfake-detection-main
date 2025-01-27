@@ -14,8 +14,9 @@ export default function Navbar() {
         <header className="sticky top-0 z-50 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white shadow-lg">
             <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
                 <Link href="/" className="flex items-center space-x-2">
-                    <Eye className="h-8 w-8 text-primary" />
-                    <span className="text-xl font-bold text-white">PurePixel</span>
+                    {/* Use the correct path for the image */}
+                    <img src="/logo.png" alt="ShaniAegis Logo" className="h-8 w-auto" />
+                    <span className="text-xl font-bold text-white">ShaniAegis</span>
                 </Link>
                 <div className="hidden md:flex space-x-8">
                     <Link href="#about" className="text-gray-300 hover:text-primary">About</Link>
